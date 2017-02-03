@@ -6,39 +6,81 @@ using System.Threading.Tasks;
 
 namespace HemtentaTdd2017.music
 {
-    class MusicPlayer : IMusicPlayer
+    public class MusicPlayer : IMusicPlayer
     {
+        private IList<ISong> listOfSongs;
+        private IMediaDatabase md;
+        private SoundMaker sm;
+
+        public MusicPlayer(IMediaDatabase mediaDatabase, SoundMaker soundMaker)
+        {
+            this.listOfSongs = new List<ISong>();
+            this.md = mediaDatabase;
+            this.sm = soundMaker;
+        }
+
         public int NumSongsInQueue
         {
             get
             {
-                throw new NotImplementedException();
+                return listOfSongs.Count;
             }
         }
 
         public void LoadSongs(string search)
         {
-            throw new NotImplementedException();
-        }
+            if (md.IsConnected == false)
+                throw new DatabaseClosedException();
 
-        public void NextSong()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string NowPlaying()
-        {
-            throw new NotImplementedException();
+            if (!string.IsNullOrEmpty(search))
+            {
+                var newSongs = md.FetchSongs(search);
+                foreach (var song in newSongs)
+                {
+                    listOfSongs.Add(song);
+                }
+            }
         }
 
         public void Play()
         {
-            throw new NotImplementedException();
+            if (md.IsConnected == false)
+                throw new DatabaseClosedException();
+
+            if (sm.NowPlaying == "Tystnad råder")
+            {
+                if (listOfSongs.Count > 0)
+                    sm.Play(listOfSongs.FirstOrDefault());
+            }
+        }
+
+        public void NextSong()
+        {
+            if (listOfSongs.Count == 0)
+                Stop();
+
+            else if (sm.NowPlaying == "Tystnad råder")
+                Play();
+
+            else
+            {
+                listOfSongs.FirstOrDefault();
+                Stop();
+                Play();
+            }
+        }
+
+        public string NowPlaying()
+        {
+            return sm.NowPlaying;
         }
 
         public void Stop()
         {
-            throw new NotImplementedException();
+            if (sm.NowPlaying == "Tystnad råder") { /*Gör inget om ingen låt spelas*/ }
+
+            else
+                sm.Stop();
         }
     }
 }

@@ -64,4 +64,13 @@ namespace HemtentaTdd2017
         public string Content { get; set; }
     }
 
+    public class UserIsNullException : Exception
+    {
+        public UserIsNullException(string message) : base(message) { }
+    }
+
+    public class PageContentIsNotValidException : Exception
+    {
+        public PageContentIsNotValidException(string message) : base(message) { }
+    }
 }

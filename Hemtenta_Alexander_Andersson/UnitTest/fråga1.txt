@@ -1,0 +1,8 @@
+Red är när man skapar ett test som misslyckas.
+Det kan bli rött om man ej har gjort implementationen än,
+eller efter man gjort implementationen.
+
+Green är ett test som lyckas med så simpel produktionskod som möjligt.
+Kan vara något simpelt som ett true och false test.
+
+Refactor är när man skriver om sin kod så den ska bli mer läsbar och effektivare utan att misslyckas.

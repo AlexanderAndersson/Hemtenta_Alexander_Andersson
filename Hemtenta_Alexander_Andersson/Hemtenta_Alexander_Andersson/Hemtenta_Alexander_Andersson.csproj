@@ -49,6 +49,8 @@
     <Compile Include="implementations\Cms.cs" />
     <Compile Include="implementations\Music.cs" />
     <Compile Include="music\MusicPlayer.cs" />
+    <Compile Include="music\Song.cs" />
+    <Compile Include="music\SoundMaker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="implementations\Webshop.cs" />
@@ -58,9 +60,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="fråga1.txt" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
